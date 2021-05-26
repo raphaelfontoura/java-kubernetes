@@ -95,6 +95,7 @@ Now, we deploy application in a kubernetes cluster running in our machine
 
 Prepare
 
+
 ### Start minikube
 `
 make k-setup
@@ -141,6 +142,35 @@ kubectl port-forward -n dev-to <pod_name> 3306:3306
 `
 
 ## Build application and deploy
+
+### Repair issue to load image inside the minikube
+https://stackoverflow.com/questions/65397050/minikube-does-not-start-on-ubuntu-20-04-lts-exiting-due-to-guest-provision
+
+Run the following commands to fix this issue
+
+Create the docker group if not exist
+```bash
+sudo groupadd docker
+```
+
+Add user to the docker group
+```bash
+sudo usermod -aG docker [user]
+```
+
+To activate changes to the group
+```bash
+newgrp docker
+```
+
+start minikube cluster
+```bash
+minikube start
+```
+ou
+```bash
+minikube -p dev.to start --cpus 2 --memory=4096
+```
 
 build app
 
